@@ -29,7 +29,7 @@ class Request
     {
 
         if ($credentials->getEnv() == "PRODUCTION")
-            $this->baseUrl = 'https://api-sandbox.getnet.com.br';
+            $this->baseUrl = 'https://api.getnet.com.br';
         elseif ($credentials->getEnv() == "HOMOLOG")
             $this->baseUrl = 'https://api-homologacao.getnet.com.br';
         elseif ($credentials->getEnv() == "SANDBOX")
