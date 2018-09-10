@@ -8,7 +8,7 @@ Todos os passos e processos referentes à integração com o sistema de captura 
 
 #### Composer
 ```
-$ composer require brunopazz/getnet-sdk
+$ composer require "brunopazz/getnet-sdk @dev"
 ```
 #### Exemplo Autorização com cartão de crédito MasterCard R$10,00 em 2x 
 
