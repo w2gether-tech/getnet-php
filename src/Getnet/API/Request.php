@@ -7,6 +7,7 @@
  */
 
 namespace Getnet\API;
+use Cake\Core\Exception\Exception;
 
 /**
  * Class Request
@@ -58,9 +59,14 @@ class Request
         ];
 
         $querystring = http_build_query($params);
-        $response = $this->send($credentials, $url_path, 'AUTH', $querystring);
-        $credentials->setAuthorizationToken($response["access_token"]);
 
+        try{
+            $response = $this->send($credentials, $url_path, 'AUTH', $querystring);
+        }catch (Exception $e){
+            throw new Exception($e->getMessage(), 100);
+        }
+
+        $credentials->setAuthorizationToken($response["access_token"]);
         return $credentials;
     }
 
@@ -122,6 +128,11 @@ class Request
             print_r($info);
             print_r(json_encode(json_decode($response), JSON_PRETTY_PRINT));
         }
+
+        if (isset(json_decode($response)->error)) {
+            throw new Exception(json_decode($response)->error_description, 100);
+        }
+
         if (curl_getinfo($curl, CURLINFO_HTTP_CODE) >= 400) {
             throw new Exception($response, 100);
         }
