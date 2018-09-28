@@ -118,7 +118,7 @@ class Customer implements \JsonSerializable
      */
     public function setBillingAddress($billing_address)
     {
-        $this->billing_address = $billing_address;
+        $this->billing_address = (string)$billing_address;
 
         return $this;
     }
@@ -164,7 +164,7 @@ class Customer implements \JsonSerializable
      */
     public function setDocumentType($document_type)
     {
-        $this->document_type = $document_type;
+        $this->document_type = (string)$document_type;
 
         return $this;
     }
@@ -183,7 +183,7 @@ class Customer implements \JsonSerializable
      */
     public function setEmail($email)
     {
-        $this->email = $email;
+        $this->email = (string)$email;
 
         return $this;
     }
@@ -202,7 +202,7 @@ class Customer implements \JsonSerializable
      */
     public function setFirstName($first_name)
     {
-        $this->first_name = $first_name;
+        $this->first_name = (string)$first_name;
 
         return $this;
     }
@@ -221,7 +221,7 @@ class Customer implements \JsonSerializable
      */
     public function setLastName($last_name)
     {
-        $this->last_name = $last_name;
+        $this->last_name = (string)$last_name;
 
         return $this;
     }
@@ -241,7 +241,7 @@ class Customer implements \JsonSerializable
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = (string)$name;
 
         return $this;
     }
@@ -260,7 +260,7 @@ class Customer implements \JsonSerializable
      */
     public function setPhoneNumber($phone_number)
     {
-        $this->phone_number = $phone_number;
+        $this->phone_number = (string)$phone_number;
 
         return $this;
     }

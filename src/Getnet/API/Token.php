@@ -66,7 +66,7 @@ class Token
      */
     public function setCardNumber($card_number)
     {
-        $this->card_number = $card_number;
+        $this->card_number = (string)$card_number;
 
         return $this;
     }
@@ -85,7 +85,7 @@ class Token
      */
     public function setCustomerId($customer_id)
     {
-        $this->customer_id = $customer_id;
+        $this->customer_id = (string)$customer_id;
 
         return $this;
     }

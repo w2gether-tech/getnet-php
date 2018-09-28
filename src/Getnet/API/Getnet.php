@@ -17,7 +17,7 @@ class Getnet
     /**
      * @var bool
      */
-    public $debug = false;
+    public $debug = true;
     /**
      * @var Request
      */
@@ -53,6 +53,14 @@ class Getnet
         return $request->auth($this);
 
 
+    }
+
+    /**
+     * @param boolean $debug
+     */
+    public function setDebug($debug)
+    {
+        $this->debug = $debug;
     }
 
     /**

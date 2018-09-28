@@ -28,7 +28,7 @@ $transaction->Credit("")
     ->setExpirationMonth("12")
     ->setExpirationYear("20")
     ->setCardholderName("Bruno Paz")
-    ->setSecurityCode("123");
+    ->setSecurityCode(123);
 
 $transaction->Customer("customer_210818263")
     ->setDocumentType("CPF")

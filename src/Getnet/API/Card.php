@@ -71,7 +71,7 @@ class Card implements \JsonSerializable
      */
     public function setSecurityCode($security_code)
     {
-        $this->security_code = $security_code;
+        $this->security_code = (string)$security_code;
 
         return $this;
     }
@@ -90,7 +90,7 @@ class Card implements \JsonSerializable
      */
     public function setBrand($brand)
     {
-        $this->brand = $brand;
+        $this->brand = (string)$brand;
 
         return $this;
     }
@@ -109,7 +109,7 @@ class Card implements \JsonSerializable
      */
     public function setCardholderName($cardholder_name)
     {
-        $this->cardholder_name = $cardholder_name;
+        $this->cardholder_name = (string)$cardholder_name;
 
         return $this;
     }
@@ -128,7 +128,7 @@ class Card implements \JsonSerializable
      */
     public function setExpirationMonth($expiration_month)
     {
-        $this->expiration_month = $expiration_month;
+        $this->expiration_month = (string)$expiration_month;
 
         return $this;
     }
@@ -147,7 +147,7 @@ class Card implements \JsonSerializable
      */
     public function setExpirationYear($expiration_year)
     {
-        $this->expiration_year = $expiration_year;
+        $this->expiration_year = (string)$expiration_year;
 
         return $this;
     }
@@ -167,7 +167,7 @@ class Card implements \JsonSerializable
      */
     public function setNumberToken(Token $token)
     {
-        $this->number_token = $token->getNumberToken();
+        $this->number_token = (string)$token->getNumberToken();
 
         return $this;
     }
