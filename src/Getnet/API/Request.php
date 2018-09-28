@@ -7,7 +7,8 @@
  */
 
 namespace Getnet\API;
-use Cake\Core\Exception\Exception;
+
+use \Exception;
 
 /**
  * Class Request
