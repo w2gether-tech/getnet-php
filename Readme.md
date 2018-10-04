@@ -13,6 +13,16 @@ $ composer
 #### Exemplo Autorização com cartão de crédito MasterCard R$27,50 em 2x 
 
 ```php
+<?php
+use Getnet\API\Getnet;
+use Getnet\API\Transaction;
+use Getnet\API\Environment;
+use Getnet\API\Token;
+use Getnet\API\Credit;
+use Getnet\API\Customer;
+use Getnet\API\Card;
+use Getnet\API\Order;
+
 $client_id      = "3a666a8c-6d97-4eb0-a62c-77e3758c3425";
 $client_secret  = "f52a2358-70e6-4baa-b77f-9f0eeb7c8706";
 $seller_id      = "c695b415-6f2e-4475-a221-3c005258a450";
