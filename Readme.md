@@ -129,7 +129,7 @@ $cancel = $getnet->AuthorizeCancel("[PAYMENT_ID]", [AMOUNT]);
 $cancel->getStatus();
 ```
 
-#### Cartão de débito
+#### CARTÃO DE DÉBITO
 ```php
 // Autenticação da API
 $getnet = new Getnet($client_id, $client_secret, $environment, $keySession);
