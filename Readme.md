@@ -8,7 +8,7 @@ Todos os passos e processos referentes à integração com o sistema de captura 
 
 #### Composer
 ```
-$ composer require "brunopazz/getnet-sdk @dev"
+$ composer 
 ```
 #### Exemplo Autorização com cartão de crédito MasterCard R$27,50 em 2x 
 
@@ -108,8 +108,8 @@ $response->getStatus();
 
 #### CONFIRMA PAGAMENTO (CAPTURA)
 ```php
-// Autenticação da API (client_id, client_secret, env)
-$getnet = new Getnet("c076e924-a3fe-492d-a41f-1f8de48fb4b1", "bc097a2f-28e0-43ce-be92-d846253ba748", "SANDBOX");
+// Autenticação da API
+$getnet = new Getnet($client_id, $client_secret, $environment, $keySession);
 
 // Processa a confirmação da autorização
 $capture = $getnet->AuthorizeConfirm("PAYMENT_ID");
@@ -120,8 +120,8 @@ $capture->getStatus();
 
 #### CANCELA PAGAMENTO (CRÉDITO e DÉBITO)
 ```php
-// Autenticação da API (client_id, client_secret, env)
-$getnet = new Getnet("c076e924-a3fe-492d-a41f-1f8de48fb4b1", "bc097a2f-28e0-43ce-be92-d846253ba748", "SANDBOX");
+// Autenticação da API
+$getnet = new Getnet($client_id, $client_secret, $environment, $keySession);
 
 $cancel = $getnet->AuthorizeCancel("[PAYMENT_ID]", [AMOUNT]);
 
@@ -131,10 +131,13 @@ $cancel->getStatus();
 
 #### Cartão de débito
 ```php
+// Autenticação da API
+$getnet = new Getnet($client_id, $client_secret, $environment, $keySession);
+
 // URL de callback
 $URL_NOTIFY = "http://localhost/url-notify";
 
-//Adicionar dados do Pagamento no lugar do credit
+//Adicionar dados do Pagamento no lugar do credit ou resto é igual ao cartão de crédito
 $transaction->debit()
             ->setCardholderMobile("5551999887766")
             ->setDynamicMcc("1799")
