@@ -4,7 +4,7 @@ E-commerce
 Todos os passos e processos referentes à integração com o sistema de captura e autorização de transações financeiras da Getnet via as funcionalidades da API.
 
  Documentação oficial
-* https://api.getnet.com.br/v1/doc/api
+* https://developers.getnet.com.br/api
 
 #### Composer
 ```
