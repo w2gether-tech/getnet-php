@@ -1,150 +1,142 @@
 <?php
 namespace Getnet\API;
-    /**
-     * Created by PhpStorm.
-     * User: brunopaz
-     * Date: 09/07/2018
-     * Time: 01:26
-     * Documentation https://api.getnet.com.br/v1/doc/api
-     */
 
 /**
  * Class Getnet
+ *
  * @package Getnet\API
  */
-class Getnet
-{
-    /**
-     * @var bool
-     */
-    public $debug = true;
-    /**
-     * @var Request
-     */
+class Getnet {
+
     private $client_id;
-    /**
-     * @var
-     */
+
     private $client_secret;
-    /**
-     * @var
-     */
-    private $env;
-    /**
-     * @var
-     */
+
+    private $environment;
+
     private $authorizationToken;
 
-    /**
-     * Getnet constructor.
-     * @param $client_id
-     * @param $client_secret
-     * @param $env
-     */
+    private $keySession;
+    
 
-    public function __construct($client_id, $client_secret, $env)
-    {
-        $this->client_id = $client_id;
+    /**
+     * 
+     * @param mixed $client_id
+     * @param mixed $client_secret
+     * @param mixed $env
+     * @return Getnet
+     */
+    public function __construct($client_id, $client_secret, Environment $environment = null, $keySession = null) {
+        
+        if (!$environment) {
+            $environment = Environment::production();
+        }
+        
+        $this->client_id     = $client_id;
         $this->client_secret = $client_secret;
-        $this->env = $env;
+        $this->environment   = $environment;
+        $this->keySession    = $keySession;
 
         $request = new Request($this);
 
         return $request->auth($this);
-
-
     }
-
+    
     /**
-     * @param boolean $debug
+     * @return \Getnet\API\Request
      */
-    public function setDebug($debug)
-    {
-        $this->debug = $debug;
-    }
-
-    /**
-     * @return $this
-     */
-    public function getAuthorizationToken()
-    {
-        return $this->authorizationToken;
-    }
-
-    /**
-     * @param $this $authorizationToken
-     */
-    public function setAuthorizationToken($authorizationToken)
-    {
-        $this->authorizationToken = $authorizationToken;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getClientId()
-    {
+    public function getClientId() {
         return $this->client_id;
     }
 
     /**
-     * @param mixed $client_id
+     * @param \Getnet\API\Request $client_id
      */
-    public function setClientId($client_id)
-    {
+    public function setClientId($client_id) {
         $this->client_id = $client_id;
+        
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getClientSecret()
-    {
+    public function getClientSecret() {
         return $this->client_secret;
     }
 
     /**
      * @param mixed $client_secret
      */
-    public function setClientSecret($client_secret)
-    {
+    public function setClientSecret($client_secret) {
         $this->client_secret = $client_secret;
+        
+        return $this;
+    }
+
+    /**
+     * @return Environment
+     */
+    public function getEnvironment() {
+        return $this->environment;
+    }
+
+    /**
+     * @param string $environment
+     */
+    public function setEnvironment(Environment $environment) {
+        $this->environment = $environment;
+        
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getEnv()
-    {
-        return $this->env;
+    public function getAuthorizationToken() {
+        return $this->authorizationToken;
     }
 
     /**
-     * @param mixed $env
+     * @param mixed $authorizationToken
      */
-    public function setEnv($env)
-    {
-        $this->env = $env;
+    public function setAuthorizationToken($authorizationToken) {
+        $this->authorizationToken = $authorizationToken;
+        
+        return $this;
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function getKeySession() {
+        return $this->keySession;
+    }
+    
+    /**
+     * @param mixed $keySession
+     */
+    public function setKeySession($keySession) {
+        $this->keySession = $keySession;
     }
 
-
     /**
+     * 
      * @param Transaction $transaction
-     * @return AuthorizeResponse
+     * @return BaseResponse|AuthorizeResponse
      */
-    public function Authorize(Transaction $transaction)
-    {
+    public function authorize(Transaction $transaction) {
         try {
 
             $request = new Request($this);
 
-            if (property_exists($transaction, "debit")) {
-                $response = $request->post($this, "/v1/payments/debit", $transaction->toJSON());
-            } elseif (property_exists($transaction, "credit")) {
+            if ($transaction->getCredit()) {
                 $response = $request->post($this, "/v1/payments/credit", $transaction->toJSON());
+            } elseif ($transaction->getDebit()) {
+                $response = $request->post($this, "/v1/payments/debit", $transaction->toJSON());
+            }else{
+                throw new \Exception("Error select credit or debit");
             }
-            if ($this->debug)
-                print $transaction->toJSON();
         } catch (\Exception $e) {
 
             $error = new BaseResponse();
@@ -152,6 +144,7 @@ class Getnet
 
             return $error;
         }
+
         $authresponse = new AuthorizeResponse();
         $authresponse->mapperJson($response);
 
@@ -159,14 +152,14 @@ class Getnet
     }
 
     /**
-     * @param $payment_id
-     * @return AuthorizeResponse|BaseResponse
+     * 
+     * @param mixed $payment_id
+     * @return BaseResponse|AuthorizeResponse
      */
-    public function AuthorizeConfirm($payment_id)
-    {
+    public function authorizeConfirm($payment_id) {
         try {
             $request = new Request($this);
-            $response = $request->post($this, "/v1/payments/credit/" . $payment_id . "/confirm", "");
+            $response = $request->post($this, "/v1/payments/credit/".$payment_id."/confirm", "");
         } catch (\Exception $e) {
 
             $error = new BaseResponse();
@@ -174,18 +167,24 @@ class Getnet
 
             return $error;
         }
+        
         $authresponse = new AuthorizeResponse();
         $authresponse->mapperJson($response);
 
         return $authresponse;
     }
 
-    public function AuthorizeConfirmDebit($payment_id, $payer_authentication_response)
-    {
+    /**
+     * 
+     * @param mixed $payment_id
+     * @param mixed $payer_authentication_response
+     * @return BaseResponse|AuthorizeResponse
+     */
+    public function authorizeConfirmDebit($payment_id, $payer_authentication_response) {
         try {
             $payer_authentication_response = array("payer_authentication_response" => $payer_authentication_response);
             $request = new Request($this);
-            $response = $request->post($this, "/v1/payments/debit/" . $payment_id . "/authenticated/finalize", json_encode($payer_authentication_response));
+            $response = $request->post($this, "/v1/payments/debit/".$payment_id."/authenticated/finalize", json_encode($payer_authentication_response));
         } catch (\Exception $e) {
 
             $error = new BaseResponse();
@@ -193,6 +192,7 @@ class Getnet
 
             return $error;
         }
+        
         $authresponse = new AuthorizeResponse();
         $authresponse->mapperJson($response);
 
@@ -200,18 +200,17 @@ class Getnet
     }
 
     /**
+     *
      * @param $payment_id
      * @param $amount_val
      * @return AuthorizeResponse|BaseResponse
      */
-    public function AuthorizeCancel($payment_id, $amount_val)
-    {
+    public function authorizeCancel($payment_id, $amount_val) {
         $amount = array("amount" => $amount_val);
 
         try {
             $request = new Request($this);
-            $response = $request->post($this, "/v1/payments/credit/" . $payment_id . "/cancel", json_encode($amount));
-
+            $response = $request->post($this, "/v1/payments/credit/".$payment_id."/cancel", json_encode($amount));
         } catch (\Exception $e) {
 
             $error = new BaseResponse();
@@ -219,6 +218,7 @@ class Getnet
 
             return $error;
         }
+        
         $authresponse = new AuthorizeResponse();
         $authresponse->mapperJson($response);
 
@@ -226,11 +226,11 @@ class Getnet
     }
 
     /**
+     *
      * @param Transaction $transaction
      * @return BaseResponse|BoletoRespose
      */
-    public function Boleto(Transaction $transaction)
-    {
+    public function boleto(Transaction $transaction) {
         try {
             $request = new Request($this);
             $response = $request->post($this, "/v1/payments/boleto", $transaction->toJSON());
@@ -243,11 +243,12 @@ class Getnet
 
             return $error;
         }
+        
         $boletoresponse = new BoletoRespose();
         $boletoresponse->mapperJson($response);
         $boletoresponse->setBaseUrl($request->getBaseUrl());
 
         return $boletoresponse;
     }
-}
 
+}

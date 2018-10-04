@@ -1,61 +1,45 @@
 <?php
 namespace Getnet\API;
-    /**
-     * Created by PhpStorm.
-     * User: brunopaz
-     * Date: 09/07/2018
-     * Time: 01:46
-     */
 
 /**
  * Class Card
+ *
  * @package Getnet\API
  */
-class Card implements \JsonSerializable
-{
-    /**
-     * @var
-     */
-    private $brand;
-    /**
-     * @var
-     */
-    private $cardholder_name;
-    /**
-     * @var
-     */
-    private $expiration_month;
-    /**
-     * @var
-     */
-    private $expiration_year;
-    /**
-     * @var
-     */
-    private $number_token;
-    /**
-     * @var
-     */
-    private $security_code;
+class Card implements \JsonSerializable {
+    
+    const BRAND_MASTERCARD  = "Mastercard";
+    const BRAND_VISA        = "Visa";
+    const BRAND_AMEX        = "Amex";
+    const BRAND_ELO         = "Elo";
+    const BRAND_HIPERCARD   = "Hipercard";
 
+    private $brand;
+
+    private $cardholder_name;
+
+    private $expiration_month;
+
+    private $expiration_year;
+
+    private $number_token;
+
+    private $security_code;
 
     /**
      * Card constructor.
+     *
      * @param Token $card
      */
-    public function __construct(Token $card)
-    {
-        $this->setNumberToken($card);
+    public function __construct(Token $token) {
+        $this->setNumberToken($token);
     }
 
-
     /**
+     *
      * @return array
      */
-
-    public function jsonSerialize()
-    {
-
+    public function jsonSerialize() {
         $vars = get_object_vars($this);
         $vars_clear = array_filter($vars, function ($value) {
             return null !== $value;
@@ -63,121 +47,101 @@ class Card implements \JsonSerializable
 
         return $vars_clear;
     }
-
+    
     /**
      * @return mixed
      */
-    public function getSecurityCode()
-    {
-        return $this->security_code;
-    }
-
-    /**
-     * @param mixed $security_code
-     * @return Card
-     */
-    public function setSecurityCode($security_code)
-    {
-        $this->security_code = (string)$security_code;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBrand()
-    {
+    public function getBrand() {
         return $this->brand;
     }
 
     /**
      * @param mixed $brand
-     * @return Card
      */
-    public function setBrand($brand)
-    {
-        $this->brand = (string)$brand;
-
+    public function setBrand($brand) {
+        $this->brand = $brand;
+        
         return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getCardholderName()
-    {
+    public function getCardholderName() {
         return $this->cardholder_name;
     }
 
     /**
      * @param mixed $cardholder_name
-     * @return Card
      */
-    public function setCardholderName($cardholder_name)
-    {
-        $this->cardholder_name = (string)$cardholder_name;
-
+    public function setCardholderName($cardholder_name) {
+        $this->cardholder_name = $cardholder_name;
+        
         return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getExpirationMonth()
-    {
+    public function getExpirationMonth() {
         return $this->expiration_month;
     }
 
     /**
      * @param mixed $expiration_month
-     * @return Card
      */
-    public function setExpirationMonth($expiration_month)
-    {
-        $this->expiration_month = (string)$expiration_month;
-
+    public function setExpirationMonth($expiration_month) {
+        $this->expiration_month = $expiration_month;
+        
         return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getExpirationYear()
-    {
+    public function getExpirationYear() {
         return $this->expiration_year;
     }
 
     /**
      * @param mixed $expiration_year
-     * @return Card
      */
-    public function setExpirationYear($expiration_year)
-    {
-        $this->expiration_year = (string)$expiration_year;
-
+    public function setExpirationYear($expiration_year) {
+        $this->expiration_year = $expiration_year;
+        
         return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getNumberToken()
-    {
+    public function getNumberToken() {
         return $this->number_token;
     }
 
-
     /**
-     * @param Token $token
-     * @return $this
+     * @param mixed $number_token
      */
-    public function setNumberToken(Token $token)
-    {
+    public function setNumberToken($token) {
         $this->number_token = (string)$token->getNumberToken();
-
+        
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSecurityCode() {
+        return $this->security_code;
+    }
+
+    /**
+     * @param mixed $security_code
+     */
+    public function setSecurityCode($security_code) {
+        $this->security_code = $security_code;
+        
+        return $this;
+    }
 
 }

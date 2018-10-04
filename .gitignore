@@ -1,2 +1,5 @@
 /vendor/
-.idea
+/.settings/
+/.project
+.buildpath
+composer.lock
