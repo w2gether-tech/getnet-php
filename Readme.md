@@ -261,10 +261,10 @@ $response->getStatus();
 ### Métodos de Pagamento
 |Método|Descrição|
 | ------- | --------- |
-|Authorize|Autoriza uma transação com Pre-Auth ou não|
-|AuthorizeConfirm|Confirma uma autorização de crédito|
-|AuthorizeConfirmDebit|Confirma uma autorização de débito|
-|AuthorizeCancel|Cancela a transação|
-|Boleto|Gera boleto|
+|authorize|Autoriza uma transação com Pre-Auth ou não|
+|authorizeConfirm|Confirma uma autorização de crédito|
+|authorizeConfirmDebit|Confirma uma autorização de débito|
+|authorizeCancel|Cancela a transação|
+|boleto|Gera boleto|
 
 
