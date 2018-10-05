@@ -244,7 +244,7 @@ class Transaction {
      * @param $brand
      * @return Credit
      */
-    public function credit($brand) {
+    public function credit($brand = null) {
         $credit = new Credit($brand);
         $this->setCredit($credit);
 

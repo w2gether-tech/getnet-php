@@ -247,6 +247,7 @@ class Getnet {
         $boletoresponse = new BoletoRespose();
         $boletoresponse->mapperJson($response);
         $boletoresponse->setBaseUrl($request->getBaseUrl());
+        $boletoresponse->generateLinks();
 
         return $boletoresponse;
     }

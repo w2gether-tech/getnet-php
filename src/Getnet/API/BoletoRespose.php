@@ -44,10 +44,21 @@ class BoletoRespose extends BaseResponse {
 
     /**
      *
+     * @param mixed $base_url
+     */
+    public function generateLinks() {
+        if ($this->getPaymentId()) {
+            $this->boleto_pdf  = $this->base_url."/v1/payments/boleto/".$this->getPaymentId()."/pdf";
+            $this->boleto_html = $this->base_url."/v1/payments/boleto/".$this->getPaymentId()."/html";
+        }
+    }
+
+    /**
+     *
      * @return mixed
      */
     public function getBoletoPdf() {
-        return $this->boleto_pdf = $this->base_url."/v1/payments/boleto/".$this->getPaymentId()."/pdf";
+        return $this->boleto_pdf;
     }
 
     /**
@@ -55,7 +66,7 @@ class BoletoRespose extends BaseResponse {
      * @return mixed
      */
     public function getBoletoHtml() {
-        return $this->boleto_html = $this->base_url."/v1/payments/boleto/".$this->getPaymentId()."/html";
+        return $this->boleto_html;
     }
 
     /**
