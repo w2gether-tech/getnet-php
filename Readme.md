@@ -7,8 +7,16 @@ Todos os passos e processos referentes à integração com o sistema de captura 
 * https://developers.getnet.com.br/api
 
 #### Composer
+
+add composer.json
 ```
-$ composer 
+"edson-nascimento/getnet-php": "^1.0"
+```
+ou execute
+```
+composer require edson-nascimento/getnet-php
+
+
 ```
 #### Exemplo Autorização com cartão de crédito MasterCard R$27,50 em 2x 
 
