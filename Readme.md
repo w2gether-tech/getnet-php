@@ -13,7 +13,6 @@ $ composer
 #### Exemplo Autorização com cartão de crédito MasterCard R$27,50 em 2x 
 
 ```php
-<?php
 use Getnet\API\Getnet;
 use Getnet\API\Transaction;
 use Getnet\API\Environment;
@@ -22,6 +21,9 @@ use Getnet\API\Credit;
 use Getnet\API\Customer;
 use Getnet\API\Card;
 use Getnet\API\Order;
+use Getnet\API\Boleto;
+
+include 'vendor/autoload.php';
 
 $client_id      = "3a666a8c-6d97-4eb0-a62c-77e3758c3425";
 $client_secret  = "f52a2358-70e6-4baa-b77f-9f0eeb7c8706";
@@ -110,7 +112,7 @@ $transaction->shipping()
 $transaction->device("device_id")->setIpAddress("127.0.0.1");
 
 // Processa a Transação
-$response = $getnet->Authorize($transaction);
+$response = $getnet->authorize($transaction);
 
 // Resultado da transação - Consultar tabela abaixo
 $response->getStatus();
@@ -122,7 +124,7 @@ $response->getStatus();
 $getnet = new Getnet($client_id, $client_secret, $environment, $keySession);
 
 // Processa a confirmação da autorização
-$capture = $getnet->AuthorizeConfirm("PAYMENT_ID");
+$capture = $getnet->authorizeConfirm("PAYMENT_ID");
 
 // Resultado da transação - Consultar tabela abaixo
 $capture->getStatus();
@@ -133,7 +135,7 @@ $capture->getStatus();
 // Autenticação da API
 $getnet = new Getnet($client_id, $client_secret, $environment, $keySession);
 
-$cancel = $getnet->AuthorizeCancel("[PAYMENT_ID]", [AMOUNT]);
+$cancel = $getnet->authorizeCancel("[PAYMENT_ID]", [AMOUNT]);
 
 // Resultado da transação - Consultar tabela abaixo
 $cancel->getStatus();
@@ -226,7 +228,7 @@ $transaction->customer("customer_210818263")
         ->setState("SP")
         ->setStreet("Av. Brasil");
 
-$response = $getnet->Boleto($transaction);
+$response = $getnet->boleto($transaction);
 
 // Resultado da transação - Consultar tabela abaixo
 $response->getStatus();
