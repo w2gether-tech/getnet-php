@@ -32,10 +32,10 @@ class Getnet {
             $environment = Environment::production();
         }
         
-        $this->client_id     = $client_id;
-        $this->client_secret = $client_secret;
-        $this->environment   = $environment;
-        $this->keySession    = $keySession;
+        $this->setClientId($client_id);
+        $this->setClientSecret($client_secret);
+        $this->setEnvironment($environment);
+        $this->setKeySession($keySession);
 
         $request = new Request($this);
 
@@ -53,7 +53,7 @@ class Getnet {
      * @param \Getnet\API\Request $client_id
      */
     public function setClientId($client_id) {
-        $this->client_id = $client_id;
+        $this->client_id = (string)$client_id;
         
         return $this;
     }
@@ -69,7 +69,7 @@ class Getnet {
      * @param mixed $client_secret
      */
     public function setClientSecret($client_secret) {
-        $this->client_secret = $client_secret;
+        $this->client_secret = (string)$client_secret;
         
         return $this;
     }
@@ -101,7 +101,7 @@ class Getnet {
      * @param mixed $authorizationToken
      */
     public function setAuthorizationToken($authorizationToken) {
-        $this->authorizationToken = $authorizationToken;
+        $this->authorizationToken = (string)$authorizationToken;
         
         return $this;
     }
@@ -117,7 +117,7 @@ class Getnet {
      * @param mixed $keySession
      */
     public function setKeySession($keySession) {
-        $this->keySession = $keySession;
+        $this->keySession = (string)$keySession;
     }
 
     /**

@@ -25,7 +25,7 @@ class Address implements \JsonSerializable {
     private $street;
 
     public function __construct($postal_code) {
-        $this->postal_code = $postal_code;
+        $this->setPostalCode($postal_code);
     }
 
     public function jsonSerialize() {
@@ -45,7 +45,7 @@ class Address implements \JsonSerializable {
      * @param mixed $city
      */
     public function setCity($city) {
-        $this->city = $city;
+        $this->city = (string)$city;
 
         return $this;
     }
@@ -63,7 +63,7 @@ class Address implements \JsonSerializable {
      * @param mixed $complement
      */
     public function setComplement($complement) {
-        $this->complement = $complement;
+        $this->complement = (string)$complement;
 
         return $this;
     }
@@ -81,7 +81,7 @@ class Address implements \JsonSerializable {
      * @param mixed $country
      */
     public function setCountry($country) {
-        $this->country = $country;
+        $this->country = (string)$country;
 
         return $this;
     }
@@ -99,7 +99,7 @@ class Address implements \JsonSerializable {
      * @param mixed $district
      */
     public function setDistrict($district) {
-        $this->district = $district;
+        $this->district = (string)$district;
 
         return $this;
     }
@@ -117,7 +117,7 @@ class Address implements \JsonSerializable {
      * @param mixed $number
      */
     public function setNumber($number) {
-        $this->number = $number;
+        $this->number = (string)$number;
 
         return $this;
     }
@@ -135,7 +135,7 @@ class Address implements \JsonSerializable {
      * @param mixed $postal_code
      */
     public function setPostalCode($postal_code) {
-        $this->postal_code = $postal_code;
+        $this->postal_code = (string)$postal_code;
 
         return $this;
     }
@@ -153,7 +153,7 @@ class Address implements \JsonSerializable {
      * @param mixed $state
      */
     public function setState($state) {
-        $this->state = $state;
+        $this->state = (string)$state;
 
         return $this;
     }
@@ -171,7 +171,7 @@ class Address implements \JsonSerializable {
      * @param mixed $street
      */
     public function setStreet($street) {
-        $this->street = $street;
+        $this->street = (string)$street;
 
         return $this;
     }

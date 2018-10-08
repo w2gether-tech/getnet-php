@@ -163,7 +163,7 @@ class Credit implements \JsonSerializable {
      * @param mixed $soft_descriptor
      */
     public function setSoftDescriptor($soft_descriptor) {
-        $this->soft_descriptor = $soft_descriptor;
+        $this->soft_descriptor = (string)$soft_descriptor;
         
         return $this;
     }
@@ -179,7 +179,7 @@ class Credit implements \JsonSerializable {
      * @param mixed $transaction_type
      */
     public function setTransactionType($transaction_type) {
-        $this->transaction_type = $transaction_type;
+        $this->transaction_type = (string)$transaction_type;
         
         return $this;
     }
@@ -225,7 +225,7 @@ class Credit implements \JsonSerializable {
      * @param mixed $cardholder_mobile
      */
     public function setCardholderMobile($cardholder_mobile) {
-        $this->cardholder_mobile = $cardholder_mobile;
+        $this->cardholder_mobile = (string)$cardholder_mobile;
         
         return $this;
     }

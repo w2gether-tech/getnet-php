@@ -30,7 +30,7 @@ class Customer implements \JsonSerializable {
     private $billing_address;
 
     public function __construct($customer_id) {
-        $this->customer_id = $customer_id;
+        $this->setCustomerId($customer_id);
     }
 
     /**
@@ -60,7 +60,7 @@ class Customer implements \JsonSerializable {
      * @param mixed $customer_id
      */
     public function setCustomerId($customer_id) {
-        $this->customer_id = $customer_id;
+        $this->customer_id = (string)$customer_id;
         
         return $this;
     }
@@ -78,7 +78,7 @@ class Customer implements \JsonSerializable {
      * @param mixed $first_name
      */
     public function setFirstName($first_name) {
-        $this->first_name = $first_name;
+        $this->first_name = (string)$first_name;
         
         return $this;
     }
@@ -96,7 +96,7 @@ class Customer implements \JsonSerializable {
      * @param mixed $last_name
      */
     public function setLastName($last_name) {
-        $this->last_name = $last_name;
+        $this->last_name = (string)$last_name;
         
         return $this;
     }
@@ -114,7 +114,7 @@ class Customer implements \JsonSerializable {
      * @param mixed $name
      */
     public function setName($name) {
-        $this->name = $name;
+        $this->name = (string)$name;
         
         return $this;
     }
@@ -132,7 +132,7 @@ class Customer implements \JsonSerializable {
      * @param mixed $email
      */
     public function setEmail($email) {
-        $this->email = $email;
+        $this->email = (string)$email;
         
         return $this;
     }
@@ -150,7 +150,7 @@ class Customer implements \JsonSerializable {
      * @param mixed $document_type
      */
     public function setDocumentType($document_type) {
-        $this->document_type = $document_type;
+        $this->document_type = (string)$document_type;
         
         return $this;
     }
@@ -168,7 +168,7 @@ class Customer implements \JsonSerializable {
      * @param mixed $document_number
      */
     public function setDocumentNumber($document_number) {
-        $this->document_number = $document_number;
+        $this->document_number = (string)$document_number;
         
         return $this;
     }
@@ -186,7 +186,7 @@ class Customer implements \JsonSerializable {
      * @param mixed $phone_number
      */
     public function setPhoneNumber($phone_number) {
-        $this->phone_number = $phone_number;
+        $this->phone_number = (string)$phone_number;
         
         return $this;
     }

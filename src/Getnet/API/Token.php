@@ -22,8 +22,8 @@ class Token {
      * @param Getnet $credencial
      */
     public function __construct($card_number, $customer_id, Getnet $credencial) {
-        $this->card_number = $card_number;
-        $this->customer_id = $customer_id;
+        $this->setCardNumber($card_number);
+        $this->setCustomerId($customer_id);
         $this->setNumberToken($credencial);
 
         return $this;
@@ -51,7 +51,7 @@ class Token {
      * @return Token
      */
     public function setCardNumber($card_number) {
-        $this->card_number = (string) $card_number;
+        $this->card_number = (string)$card_number;
 
         return $this;
     }
@@ -70,7 +70,7 @@ class Token {
      * @return Token
      */
     public function setCustomerId($customer_id) {
-        $this->customer_id = (string) $customer_id;
+        $this->customer_id = (string)$customer_id;
 
         return $this;
     }

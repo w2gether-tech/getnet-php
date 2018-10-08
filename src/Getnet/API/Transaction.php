@@ -62,7 +62,7 @@ class Transaction {
      * @param mixed $seller_id
      */
     public function setSellerId($seller_id) {
-        $this->seller_id = $seller_id;
+        $this->seller_id = (string)$seller_id;
         
         return $this;
     }
@@ -94,7 +94,7 @@ class Transaction {
      * @param string $currency
      */
     public function setCurrency($currency) {
-        $this->currency = $currency;
+        $this->currency = (string)$currency;
         
         return $this;
     }

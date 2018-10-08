@@ -36,7 +36,7 @@ class Device implements \JsonSerializable {
      * @param mixed $device_id
      */
     public function setDeviceId($device_id) {
-        $this->device_id = $device_id;
+        $this->device_id = (string)$device_id;
         
         return $this;
     }
@@ -52,7 +52,7 @@ class Device implements \JsonSerializable {
      * @param mixed $ip_address
      */
     public function setIpAddress($ip_address) {
-        $this->ip_address = $ip_address;
+        $this->ip_address = (string)$ip_address;
         
         return $this;
     }

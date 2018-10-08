@@ -37,7 +37,7 @@ class Shipping implements \JsonSerializable {
      * @param mixed $first_name
      */
     public function setFirstName($first_name) {
-        $this->first_name = $first_name;
+        $this->first_name = (string)$first_name;
         
         return $this;
     }
@@ -55,7 +55,7 @@ class Shipping implements \JsonSerializable {
      * @param mixed $name
      */
     public function setName($name) {
-        $this->name = $name;
+        $this->name = (string)$name;
         
         return $this;
     }
@@ -73,7 +73,7 @@ class Shipping implements \JsonSerializable {
      * @param mixed $email
      */
     public function setEmail($email) {
-        $this->email = $email;
+        $this->email = (string)$email;
         
         return $this;
     }
@@ -91,7 +91,7 @@ class Shipping implements \JsonSerializable {
      * @param mixed $phone_number
      */
     public function setPhoneNumber($phone_number) {
-        $this->phone_number = $phone_number;
+        $this->phone_number = (string)$phone_number;
         
         return $this;
     }
@@ -151,11 +151,11 @@ class Shipping implements \JsonSerializable {
      */
     public function populateByCustomer(Customer $customer) {
         
-        $this->first_name   = $customer->getFirstName();
-        $this->name         = $customer->getName();
-        $this->email        = $customer->getEmail();
-        $this->phone_number = $customer->getPhoneNumber();
-        $this->address      = $customer->getBillingAddress();
+        $this->setFirstName($customer->getFirstName());
+        $this->setName($customer->getName());
+        $this->setEmail($customer->getEmail());
+        $this->setPhoneNumber($customer->getPhoneNumber());
+        $this->setAddress($customer->getBillingAddress());
         
         return $this;
     }

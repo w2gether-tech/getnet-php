@@ -48,7 +48,7 @@ class Boleto implements \JsonSerializable {
      * @return Boleto
      */
     public function setOurNumber($our_number) {
-        $this->our_number = $our_number;
+        $this->our_number = (string)$our_number;
 
         return $this;
     }
@@ -67,7 +67,7 @@ class Boleto implements \JsonSerializable {
      * @return Boleto
      */
     public function setDocumentNumber($document_number) {
-        $this->document_number = $document_number;
+        $this->document_number = (string)$document_number;
 
         return $this;
     }
@@ -86,7 +86,7 @@ class Boleto implements \JsonSerializable {
      * @return Boleto
      */
     public function setExpirationDate($expiration_date) {
-        $this->expiration_date = $expiration_date;
+        $this->expiration_date = (string)$expiration_date;
 
         return $this;
     }
@@ -105,7 +105,7 @@ class Boleto implements \JsonSerializable {
      * @return Boleto
      */
     public function setInstructions($instructions) {
-        $this->instructions = $instructions;
+        $this->instructions = (string)$instructions;
 
         return $this;
     }
@@ -124,7 +124,7 @@ class Boleto implements \JsonSerializable {
      * @return Boleto
      */
     public function setProvider($provider) {
-        $this->provider = $provider;
+        $this->provider = (string)$provider;
 
         return $this;
     }

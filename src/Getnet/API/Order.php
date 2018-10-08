@@ -48,7 +48,7 @@ class Order implements \JsonSerializable {
      * @param mixed $order_id
      */
     public function setOrderId($order_id) {
-        $this->order_id = $order_id;
+        $this->order_id = (string)$order_id;
         
         return $this;
     }
@@ -64,7 +64,7 @@ class Order implements \JsonSerializable {
      * @param mixed $product_type
      */
     public function setProductType($product_type) {
-        $this->product_type = $product_type;
+        $this->product_type = (string)$product_type;
         
         return $this;
     }
