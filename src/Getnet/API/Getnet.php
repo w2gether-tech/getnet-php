@@ -200,6 +200,7 @@ class Getnet {
     }
 
     /**
+     * Estorna ou desfaz transações feitas no mesmo dia (D0).
      *
      * @param $payment_id
      * @param $amount_val
@@ -211,6 +212,35 @@ class Getnet {
         try {
             $request = new Request($this);
             $response = $request->post($this, "/v1/payments/credit/".$payment_id."/cancel", json_encode($amount));
+        } catch (\Exception $e) {
+
+            $error = new BaseResponse();
+            $error->mapperJson(json_decode($e->getMessage(), true));
+
+            return $error;
+        }
+        
+        $authresponse = new AuthorizeResponse();
+        $authresponse->mapperJson($response);
+
+        return $authresponse;
+    }
+
+    /**
+     * Solicita o cancelamento de transações que foram realizadas há mais de 1 dia (D+n).
+     * 
+     * @param mixed $payment_id
+     * @param mixed $cancel_amount
+     * @param mixed $cancel_custom_key
+     * @return AuthorizeResponse|BaseResponse
+     */
+    public function cancelTransaction($payment_id, $cancel_amount, $cancel_custom_key) {
+        
+        $params = array("payment_id"=>$payment_id, "cancel_amount"=>$cancel_amount, "cancel_custom_key"=>$cancel_custom_key);
+
+        try {
+            $request = new Request($this);
+            $response = $request->post($this, "/v1/payments/cancel/request", json_encode($params));
         } catch (\Exception $e) {
 
             $error = new BaseResponse();
