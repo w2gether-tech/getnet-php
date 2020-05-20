@@ -241,11 +241,10 @@ class Transaction {
 
     /**
      *
-     * @param $brand
      * @return Credit
      */
-    public function credit($brand = null) {
-        $credit = new Credit($brand);
+    public function credit() {
+        $credit = new Credit();
         $this->setCredit($credit);
 
         return $credit;
@@ -269,11 +268,10 @@ class Transaction {
 
     /**
      *
-     * @param $brand
      * @return Credit
      */
-    public function debit($brand) {
-        $debit = new Credit($brand);
+    public function debit() {
+        $debit = new Credit();
         
         $this->setDebit($debit);
 

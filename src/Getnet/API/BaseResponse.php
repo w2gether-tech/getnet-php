@@ -21,9 +21,13 @@ class BaseResponse implements \JsonSerializable {
     public $status;
 
     public $received_at;
-
+    
+    public $message;
+    
     public $error_message;
 
+    public $error_code;
+    
     public $description;
 
     public $description_detail;
@@ -33,13 +37,32 @@ class BaseResponse implements \JsonSerializable {
     public $responseJSON;
 
     public $status_label;
-
+    
     /**
      *
      * @return array
      */
     public function jsonSerialize() {
         return get_object_vars($this);
+    }
+    
+    /**
+     *
+     * @param $json
+     *            
+     * @return $this
+     */
+    public function mapperJson($json) {
+        array_walk_recursive($json, function ($value, $key) {
+            
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        });
+            
+        $this->setResponseJSON($json);
+        
+        return $this;
     }
 
     /**
@@ -265,25 +288,6 @@ class BaseResponse implements \JsonSerializable {
 
     /**
      *
-     * @param
-     *            $json
-     * @return $this
-     */
-    public function mapperJson($json) {
-        array_walk_recursive($json, function ($value, $key) {
-
-            if (property_exists($this, $key)) {
-                $this->$key = $value;
-            }
-        });
-
-        $this->setResponseJSON($json);
-
-        return $this;
-    }
-
-    /**
-     *
      * @return mixed
      */
     public function getResponseJSON() {
@@ -299,4 +303,36 @@ class BaseResponse implements \JsonSerializable {
         
         return $this;
     }
+    /**
+     * @return mixed
+     */
+    public function getMessage() {
+        return $this->message;
+    }
+
+    /**
+     * @param mixed $message
+     */
+    public function setMessage($message) {
+        $this->message = $message;
+        
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getError_code() {
+        return $this->error_code;
+    }
+
+    /**
+     * @param mixed $error_code
+     */
+    public function setError_code($error_code) {
+        $this->error_code = $error_code;
+        
+        return $this;
+    }
+
 }

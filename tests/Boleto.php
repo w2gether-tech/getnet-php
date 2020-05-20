@@ -35,7 +35,7 @@ $transaction->order("123456")
 
 $transaction->boleto("000001946598")
             ->setDocumentNumber("170500000019763")
-            ->setExpirationDate("21/11/2018")
+            ->setExpirationDate(date('d/m/Y', strtotime("+2 days")))
             ->setProvider(Boleto::PROVIDER_SANTANDER)
             ->setInstructions("Não receber após o vencimento");
 
