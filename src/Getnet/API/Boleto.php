@@ -26,7 +26,7 @@ class Boleto implements \JsonSerializable {
      * @param
      *            $our_number
      */
-    public function __construct($our_number) {
+    public function __construct($our_number = null) {
         $this->our_number = $our_number;
     }
 

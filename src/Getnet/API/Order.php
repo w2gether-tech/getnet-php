@@ -29,7 +29,7 @@ class Order implements \JsonSerializable {
      * 
      * @param mixed $order_id
      */
-    public function __construct($order_id) {
+    public function __construct($order_id = null) {
         $this->order_id = $order_id;
     }
 

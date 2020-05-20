@@ -29,7 +29,7 @@ class Customer implements \JsonSerializable {
 
     private $billing_address;
 
-    public function __construct($customer_id) {
+    public function __construct($customer_id = null) {
         $this->setCustomerId($customer_id);
     }
 

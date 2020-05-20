@@ -17,7 +17,7 @@ class Device implements \JsonSerializable {
      * 
      * @param mixed $device_id
      */
-    public function __construct($device_id) {
+    public function __construct($device_id = null) {
         $this->device_id = $device_id;
     }
 

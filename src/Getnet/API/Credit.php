@@ -23,7 +23,7 @@ class Credit implements \JsonSerializable {
 
     private $number_installments;
 
-    private $pre_authorization;
+    private $pre_authorization = false;
 
     private $save_card_data;
 
@@ -34,14 +34,6 @@ class Credit implements \JsonSerializable {
     private $card;
 
     private $cardholder_mobile;
-
-    /**
-     *
-     * @param mixed $pre_authorization
-     */
-    public function __construct($pre_authorization) {
-        $this->pre_authorization = $pre_authorization;
-    }
 
     /**
      *
